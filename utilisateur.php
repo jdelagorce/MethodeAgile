@@ -125,9 +125,11 @@ class user {
             $table = 'user';
             insertData($field,$data,$table);
             echo 'ça semble ok';
+            return true;
         }
         return false;
     }
+
     public function updateUser($newNom, $newPrenom,$newMdp,$newRole){
         if(!empty($newNom) && !empty($newMdp) && !empty($newPrenom) && !empty($newRole) ){
             $field = array('Id','Nom','Prenom','mdp','Id_Role');
@@ -135,7 +137,20 @@ class user {
             $data = array('','\''.$newNom,$newPrenom.'\'','\''.$newMdp.'\'',$newRole);
             $table = user;
             updateData($field,$data,$table);
+            return true;
         }
+        return false;
     }
 
+    public function afficheListeUser($table,$id){
+        selectDetailData($table,$id);
+    }
+
+    public function afficheUser($table){
+        selectData($table);
+    }
+
+    public function deleteUser($table, $id){
+        deleteData($table,$id);
+    }
 } 
