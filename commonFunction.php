@@ -38,6 +38,16 @@ function insertData( $field, $data, $table)
         }
     }
     echo $q;
+    try
+    {
+        $bdd->exec($q);
+        return true;
+    }
+    catch(Exception $e)
+    {
+        return false;
+    }
+
 }
 
 function updateData($field, $data, $table){
@@ -48,6 +58,65 @@ function updateData($field, $data, $table){
         $q = $q . $field[i] . ' = ' .$table[i];
 
     }
-    $q = $q. 'WHERE id = '$data[0].' ;';
+    $q = $q. 'WHERE id = '. $data[0].' ;';
+    echo $q;
 
+    try
+    {
+        $bdd->exec($q);
+        return true;
+    }
+    catch(Exception $e)
+    {
+        return false;
+    }
+
+}
+
+function deleteData($table,$id){
+    $q = "DELETE FROM ". $table ." WHERE id = ". $id;
+    echo $q;
+    try
+    {
+        $bdd->exec($q);
+        return true;
+    }
+    catch(Exception $e)
+    {
+        return false;
+    }
+}
+
+function selectDetailData($table,$id){
+    try
+    {
+        $reponse = $bdd->query('SELECT * FROM '.$table.' WHERE id = '.$id);
+        return $reponse;
+    }
+    catch(Exception $e)
+    {
+        return false;
+    }
+}
+function selectDetailData($table,$id){
+    try
+    {
+        $reponse = $bdd->query('SELECT * FROM '.$table.' WHERE id = '.$id);
+        return $reponse;
+    }
+    catch(Exception $e)
+    {
+        return false;
+    }
+}
+function selectData($table){
+    try
+    {
+        $reponse = $bdd->query('SELECT * FROM '.$table.';');
+        return $reponse;
+    }
+    catch(Exception $e)
+    {
+        return false;
+    }
 }
