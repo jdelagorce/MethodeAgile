@@ -131,5 +131,21 @@ class Commande{
         selectData($table);
     }
 
+    function SelectListCommand($id){
+        if(!empty($id)){
+            $table ='commande';
+            selectDetailData($table,$id);
+        }
+        return false;
+    }
+
+    function DeleteCommand($id){
+        if(!empty($id)){
+            $table ='commande';
+            deleteData($table,$id);
+        }
+        return false;
+    }
+
 } 
 ?>
