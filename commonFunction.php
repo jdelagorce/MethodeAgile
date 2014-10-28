@@ -11,8 +11,32 @@ function encryptMd5($aCrypter){
    return md5($aCrypter);
 }
 
-function insertData( $data = array(), $table)
+function insertData( $field, $data, $table)
 {
-    $q = "INSERT INTO ". $table ." VALUES ";
-    
+    $i = 0;
+    $q = "INSERT INTO ". $table ." (";
+    while($i <= sizeof($field))
+    {
+        $q = $q . $field[i];
+        if($i == sizeof($field))
+        {
+            $q = $q . ' , ';
+        } else {
+           $q = $q . ') ';
+        }
+    }
+    $q = $q. 'VALUES (';
+    $i = 0;
+    while($i <= sizeof($data))
+    {
+        $q = $q . '\'' .$data[i]. '\'' ;
+        if($i == sizeof($data))
+        {
+            $q = $q . ' , ';
+        } else {
+            $q = $q . '); ';
+        }
+    }
+    echo $q;
+
 }
