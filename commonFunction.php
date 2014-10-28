@@ -48,6 +48,6 @@ function updateData($field, $data, $table){
         $q = $q . $field[i] . ' = ' .$table[i];
 
     }
-    $q = $q. 'WHERE id = '$data[0].' ;';
+    $q = $q. 'WHERE id = '.$data[0].' ;';
 
 }
