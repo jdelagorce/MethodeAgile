@@ -98,17 +98,6 @@ function selectDetailData($table,$id){
         return false;
     }
 }
-function selectDetailData($table,$id){
-    try
-    {
-        $reponse = $bdd->query('SELECT * FROM '.$table.' WHERE id = '.$id);
-        return $reponse;
-    }
-    catch(Exception $e)
-    {
-        return false;
-    }
-}
 function selectData($table){
     try
     {
