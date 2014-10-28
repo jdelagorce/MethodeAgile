@@ -5,6 +5,25 @@
  * Date: 17/10/14
  * Time: 10:33
  */
+session_start();
+if(!empty($_POST['usermail']) && !empty($_POST['password'])){
+    if($_POST['usermail'] == 'titi' && $_POST['password']=='titi'){
+        //définition admin
+        session_start();
+        $_SESSION['role']=1;
+
+    }elseif($_POST['usermail'] == 'toto' && $_POST['password']=='toto'){
+        //définition user
+        session_start();
+        $_SESSION['role']=2;
+    }elseif($_POST['usermail'] == 'tutu' && $_POST['password']=='tutu'){
+        //définition responsable
+        session_start();
+        $_SESSION['role']=3;
+
+    }
+
+}
 ?>
 
 <!DOCTYPE html>
@@ -16,7 +35,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>Theme Template for Bootstrap</title>
+    <title>Gestion Commande</title>
 
     <!-- Bootstrap core CSS -->
     <link href="assets/css/bootstrap.min.css" rel="stylesheet">
@@ -35,30 +54,35 @@
     <div class="container">
         <div class="navbar-header">
             <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target=".navbar-collapse">
-                <span class="sr-only">Toggle navigation</span>
+                <span class="sr-only">Commande</span>
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
-            <a class="navbar-brand" href="#">Bootstrap theme</a>
+            <a class="navbar-brand" href="#">Extranet</a>
         </div>
         <div class="navbar-collapse collapse">
             <ul class="nav navbar-nav">
-                <li class="active"><a href="#">Home</a></li>
-                <li><a href="#about">About</a></li>
-                <li><a href="#contact">Contact</a></li>
-                <li class="dropdown">
-                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">Dropdown <span class="caret"></span></a>
-                    <ul class="dropdown-menu" role="menu">
-                        <li><a href="#">Action</a></li>
-                        <li><a href="#">Another action</a></li>
-                        <li><a href="#">Something else here</a></li>
-                        <li class="divider"></li>
-                        <li class="dropdown-header">Nav header</li>
-                        <li><a href="#">Separated link</a></li>
-                        <li><a href="#">One more separated link</a></li>
-                    </ul>
-                </li>
+                <li class="active"><a href="index.php">Accueil</a></li>
+                <?php  if(!empty($_SESSION['role'])){ ?>
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">Gestion Commande <span class="caret"></span></a>
+                        <ul class="dropdown-menu" role="menu">
+                            <li><a href="VisualiserCmd.php">Visualiser les commandes</a></li>
+                            <li><a href="#">Ajouter une commande</a></li>
+                        </ul>
+                    </li>
+                    <?php
+                        if($_SESSION['role']==0 || $_SESSION['role']==1){
+
+                        }
+                    ?>
+                    <li><a href="#contact">Gestion utilisateur</a></li>
+                    <li><a href="deconnect.php">Déconnexion</a></li>
+                <?php
+                    }
+                    ?>
+
             </ul>
         </div><!--/.nav-collapse -->
     </div>
@@ -68,9 +92,49 @@
 
 <!-- Main jumbotron for a primary marketing message or call to action -->
 <div class="jumbotron">
-    <h1>Hello, world!</h1>
-    <p>This is a template for a simple marketing or informational website. It includes a large callout called a jumbotron and three supporting pieces of content. Use it as a starting point to create something more unique.</p>
-    <p><a href="#" class="btn btn-primary btn-lg" role="button">Learn more &raquo;</a></p>
+
+    <?php
+
+    if(empty($_SESSION['role'])){
+        ?>
+        <h1>Connexion</h1>
+        <p>Veuillez renseigner les champs de connexion suivants : </p>
+
+        <form name="login" action="index.php" method="post" accept-charset="utf-8">
+            <table style="padding:10px; margin: auto; witdh: 50%;text-align: left;">
+                <tr style="padding:10px;">
+                    <td style="padding:10px; ">
+                        <label for="usermail">Identifiant</label>
+                    </td>
+                    <td style="padding:10px;">
+                        <input width=50% type="text" name="usermail" placeholder="identifiant" required>
+                    </td>
+                </tr>
+                <tr style="padding:10px;">
+                    <td style="padding:10px;">
+                        <label for="password">Mot de passe</label>
+                    </td>
+                    <td style="padding:10px;">
+                        <input width=50% type="password" name="password" placeholder="password" required>
+                    </td>
+                </tr>
+                <tr style="padding:10px;">
+                    <td></td>
+                    <td style="padding:10px;">
+                        <input type="submit"  class="btn btn-primary btn-lg" value="Connexion &raquo;"/>
+                    </td>
+                </tr>
+            </table>
+        </form>
+    <?php
+    }else{
+        ?>
+        <h1>Bienvenue</h1>
+        <p>Voici les dernières commandes passées:</p>
+        <?php
+    }
+    ?>
+
 </div>
 
 
