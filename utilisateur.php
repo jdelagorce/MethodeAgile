@@ -114,18 +114,28 @@ class user {
         return $this->prenom;
     }
 
+
     public function createUser($newNom, $newPrenom, $newMdp, $newRole)
     {
         if(!empty($newNom) && !empty($newMdp) && !empty($newPrenom) && !empty($newRole) ){
             $field = array('Id','Nom','Prenom','mdp','Date_creation','Id_Role');
             $newMdp = md5($newMdp);
             $dateCreation = date('Y-m-d');
-            $data = array('',$newNom,$newPrenom,$newMdp,$dateCreation,$newRole);
+            $data = array('','\''.$newNom.'\'','\''.$newPrenom.'\'','\''.$newMdp.'\'',$dateCreation,$newRole);
             $table = 'user';
             insertData($field,$data,$table);
             echo 'ça semble ok';
         }
         return false;
+    }
+    public function updateUser($newNom, $newPrenom,$newMdp,$newRole){
+        if(!empty($newNom) && !empty($newMdp) && !empty($newPrenom) && !empty($newRole) ){
+            $field = array('Id','Nom','Prenom','mdp','Id_Role');
+            $newMdp = md5($newMdp);
+            $data = array('','\''.$newNom,$newPrenom.'\'','\''.$newMdp.'\'',$newRole);
+            $table = user;
+            updateData($field,$data,$table);
+        }
     }
 
 } 

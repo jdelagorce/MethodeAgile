@@ -38,5 +38,16 @@ function insertData( $field, $data, $table)
         }
     }
     echo $q;
+}
+
+function updateData($field, $data, $table){
+    $i = 1;
+    $q = "UPDATE ". $table ." SET ";
+    while($i <= sizeof($field))
+    {
+        $q = $q . $field[i] . ' = ' .$table[i];
+
+    }
+    $q = $q. 'WHERE id = '$data[0].' ;';
 
 }
