@@ -126,7 +126,10 @@ class Commande{
       insertData($field, $data,$table);
   }
 
-    function SelectCommand()
+    function SelectCommand(){
+        $table = 'commande';
+        selectData($table);
+    }
 
 } 
 ?>

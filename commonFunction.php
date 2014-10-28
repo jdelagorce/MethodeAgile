@@ -56,7 +56,6 @@ function updateData($field, $data, $table){
     while($i <= sizeof($field))
     {
         $q = $q . $field[i] . ' = ' .$table[i];
-
     }
     $q = $q. 'WHERE id = '. $data[0].' ;';
     echo $q;
